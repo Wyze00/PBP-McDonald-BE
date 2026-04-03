@@ -3,6 +3,10 @@ generator client {
   output   = "./generated/"
 }
 
+datasource db {
+  provider = "postgresql"
+}
+
 enum Role {
   ADMIN
   KITCHEN
@@ -20,22 +24,25 @@ model User {
   @@map("users")
 }
 
-enum ProductCategory {
-  AlaCarte
-  Beverage
-  Appetizer
-  Package
-}
-
 model Product {
   id String @id @db.VarChar(100) @default(uuid())
   name String @db.VarChar(100) @unique
   description String @db.Text
+  imageUrl String @db.VarChar(255)
   price Int
-  category ProductCategory
+  product_category_id String @db.VarChar(100)
 
   orders OrderProduct[]
+  productCategory ProductCategory @relation(fields: [product_category_id], references: [id])
   @@map("products")
+}
+
+model ProductCategory {
+  id String @id @db.VarChar(100) @default(uuid())
+  name String @db.VarChar(100) @unique
+  
+  products Product[]
+  @@map("prouct_categories")
 }
 
 enum OrderStatus {
@@ -93,8 +100,4 @@ model OrderTransaction {
   order Order @relation(fields: [order_id], references: [id])
 
   @@map("order_transactions")
-}
-
-datasource db {
-  provider = "postgresql"
 }
