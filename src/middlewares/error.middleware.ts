@@ -15,7 +15,7 @@ export const errorMiddleware = (err: unknown, req: Request, res: Response, next:
 
     if (err instanceof ZodError) {
         return res.status(400).json({
-            error: err.message,
+            error: err.issues.map((val) => val.message).toString(),
         })
     }
 
