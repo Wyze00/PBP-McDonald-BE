@@ -59,6 +59,11 @@ export class AuthRouterWithMiddleware {
         })
 
         this.router.delete('/logout', async (req: RequestWithUser, res: Response) => {
+
+            res.clearCookie('token', {
+                path: '/'
+            });   
+
             return res.status(200).json({
                 success: 'ok',
             });
