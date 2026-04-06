@@ -5,6 +5,9 @@ import cookieParser from 'cookie-parser';
 import { logRequestMiddleware } from './middlewares/log.middleware.js';
 import { logger } from './utils/winston.util.js';
 import { AuthRouter, AuthRouterWithMiddleware } from './routers/auth.router.js';
+import { prismaClient } from './utils/prisma.util.js';
+import { BcryptUtil } from './utils/bcrypt.util.js';
+import { ProductRouter } from './routers/product.router.js';
 
 const app = express();
 
@@ -26,6 +29,7 @@ app.use(logRequestMiddleware);
 // Router
 app.use('/api/auth', AuthRouter.getRouter());
 app.use('/api/auth', AuthRouterWithMiddleware.getRouter());
+app.use('/api', ProductRouter.getRouter())
 // Router
 
 // Error middleware
