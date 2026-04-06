@@ -3,7 +3,15 @@ import { prismaClient } from "src/utils/prisma.util.js";
 
 export class ProductService {
     static async fetchAll(): Promise<Product[]> {
-        const products = await prismaClient.product.findMany();
+        const products = await prismaClient.product.findMany({
+            include: {
+                productCategory: {
+                    select: {
+                        name: true,
+                    }
+                }
+            }
+        });
         return products
     }
 }
