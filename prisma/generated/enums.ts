@@ -17,16 +17,6 @@ export const Role = {
 export type Role = (typeof Role)[keyof typeof Role]
 
 
-export const ProductCategory = {
-  AlaCarte: 'AlaCarte',
-  Beverage: 'Beverage',
-  Appetizer: 'Appetizer',
-  Package: 'Package'
-} as const
-
-export type ProductCategory = (typeof ProductCategory)[keyof typeof ProductCategory]
-
-
 export const OrderStatus = {
   READY: 'READY',
   PENDING: 'PENDING',

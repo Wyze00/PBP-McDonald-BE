@@ -14,7 +14,7 @@ export class JwtUtil {
 
     static async sign (data: string | object): Promise<string> {
         return jwt.sign(data, JwtUtil.SECRET, {
-            expiresIn: '5m'
+            expiresIn: '1h'
         });
     }
 
