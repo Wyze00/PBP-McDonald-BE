@@ -47,7 +47,7 @@ model ProductCategory {
 
 enum OrderStatus {
   READY
-  PENDING
+  CANCELED
   ONGOING
   COMPLETED
 }
@@ -86,7 +86,6 @@ enum PaymentMethod {
 }
 
 enum OrderTransactionStatus {
-  PENDING
   CANCELED
   SUCCESS
 }
@@ -96,6 +95,7 @@ model OrderTransaction {
   order_id String @db.VarChar(100) @unique
   paymentMehthod PaymentMethod
   totalCost Int 
+  status OrderTransactionStatus @default(SUCCESS)
 
   order Order @relation(fields: [order_id], references: [id])
 

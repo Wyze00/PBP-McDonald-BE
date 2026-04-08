@@ -2,16 +2,13 @@
 CREATE TYPE "Role" AS ENUM ('ADMIN', 'KITCHEN');
 
 -- CreateEnum
-CREATE TYPE "ProductCategory" AS ENUM ('AlaCarte', 'Beverage', 'Appetizer', 'Package');
-
--- CreateEnum
-CREATE TYPE "OrderStatus" AS ENUM ('READY', 'PENDING', 'ONGOING', 'COMPLETED');
+CREATE TYPE "OrderStatus" AS ENUM ('READY', 'CANCELED', 'ONGOING', 'COMPLETED');
 
 -- CreateEnum
 CREATE TYPE "PaymentMethod" AS ENUM ('CASH', 'QRIS', 'CARD');
 
 -- CreateEnum
-CREATE TYPE "OrderTransactionStatus" AS ENUM ('PENDING', 'CANCELED', 'SUCCESS');
+CREATE TYPE "OrderTransactionStatus" AS ENUM ('CANCELED', 'SUCCESS');
 
 -- CreateTable
 CREATE TABLE "users" (
@@ -31,10 +28,19 @@ CREATE TABLE "products" (
     "id" VARCHAR(100) NOT NULL,
     "name" VARCHAR(100) NOT NULL,
     "description" TEXT NOT NULL,
+    "imageUrl" VARCHAR(255) NOT NULL,
     "price" INTEGER NOT NULL,
-    "category" "ProductCategory" NOT NULL,
+    "product_category_id" VARCHAR(100) NOT NULL,
 
     CONSTRAINT "products_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "prouct_categories" (
+    "id" VARCHAR(100) NOT NULL,
+    "name" VARCHAR(100) NOT NULL,
+
+    CONSTRAINT "prouct_categories_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -64,6 +70,7 @@ CREATE TABLE "order_transactions" (
     "order_id" VARCHAR(100) NOT NULL,
     "paymentMehthod" "PaymentMethod" NOT NULL,
     "totalCost" INTEGER NOT NULL,
+    "status" "OrderTransactionStatus" NOT NULL DEFAULT 'SUCCESS',
 
     CONSTRAINT "order_transactions_pkey" PRIMARY KEY ("id")
 );
@@ -75,6 +82,9 @@ CREATE UNIQUE INDEX "users_username_key" ON "users"("username");
 CREATE UNIQUE INDEX "products_name_key" ON "products"("name");
 
 -- CreateIndex
+CREATE UNIQUE INDEX "prouct_categories_name_key" ON "prouct_categories"("name");
+
+-- CreateIndex
 CREATE UNIQUE INDEX "orders_orderDate_orderNumber_key" ON "orders"("orderDate", "orderNumber");
 
 -- CreateIndex
@@ -82,6 +92,9 @@ CREATE UNIQUE INDEX "order_products_details_order_id_product_id_key" ON "order_p
 
 -- CreateIndex
 CREATE UNIQUE INDEX "order_transactions_order_id_key" ON "order_transactions"("order_id");
+
+-- AddForeignKey
+ALTER TABLE "products" ADD CONSTRAINT "products_product_category_id_fkey" FOREIGN KEY ("product_category_id") REFERENCES "prouct_categories"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "order_products_details" ADD CONSTRAINT "order_products_details_product_id_fkey" FOREIGN KEY ("product_id") REFERENCES "products"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
