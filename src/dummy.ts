@@ -159,6 +159,7 @@ async function dummyTransaction () {
             paymentMehthod: 'CARD',
             totalCost: 5000,
             order_id: 'order1',
+            status: 'SUCCESS'
         }
     })
 
@@ -168,6 +169,7 @@ async function dummyTransaction () {
             paymentMehthod: 'QRIS',
             totalCost: 10000,
             order_id: 'order2',
+            status: 'SUCCESS'
         }
     })
 
@@ -177,6 +179,7 @@ async function dummyTransaction () {
             paymentMehthod: 'CASH',
             totalCost: 15000,
             order_id: 'order3',
+            status: 'SUCCESS'
         }
     })
 
@@ -186,6 +189,24 @@ async function dummyTransaction () {
             paymentMehthod: 'QRIS',
             totalCost: 7239,
             order_id: 'order4',
+            status: 'SUCCESS'
         }
     })
 }
+
+dummyUser()
+.then(() => {
+    dummyCategory()
+    .then(() => {
+        dummyProduct()
+        .then(() => {
+            dummyOrder()
+            .then(() => {
+                dummyTransaction()
+                .then(() => {
+                    console.log('Callback Hell');
+                })
+            })
+        })
+    })
+})
