@@ -19,7 +19,7 @@ export type Role = (typeof Role)[keyof typeof Role]
 
 export const OrderStatus = {
   READY: 'READY',
-  PENDING: 'PENDING',
+  CANCELED: 'CANCELED',
   ONGOING: 'ONGOING',
   COMPLETED: 'COMPLETED'
 } as const
@@ -37,7 +37,6 @@ export type PaymentMethod = (typeof PaymentMethod)[keyof typeof PaymentMethod]
 
 
 export const OrderTransactionStatus = {
-  PENDING: 'PENDING',
   CANCELED: 'CANCELED',
   SUCCESS: 'SUCCESS'
 } as const
