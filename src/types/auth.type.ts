@@ -13,3 +13,12 @@ export interface User {
     username: string;
     role: string;
 }
+
+export interface PostResetPasswordRequest {
+    email: string;
+}
+
+export interface PostResetPasswordVerifyRequest {
+    token: string;
+    password: string;
+}
