@@ -16,10 +16,13 @@ model User {
   id String @id @db.VarChar(100) @default(uuid())
   username String @db.VarChar(20) @unique
   password String @db.VarChar(100)
+  email String @db.VarChar(100) @unique
   role Role
   createdAt DateTime @default(now())
   updatedAt DateTime?
   deletedAt DateTime?
+  resetPasswordToken String? @db.VarChar(255)
+  resetPasswordExpires DateTime?
 
   @@map("users")
 }
