@@ -7,12 +7,14 @@ async function dummyUser () {
             {
                 username: 'admin',
                 password: await BcryptUtil.hash('adminadmin'),
-                role: 'ADMIN'
+                role: 'ADMIN',
+                email: 'garfield38@ethereal.email'
             },
             {
                 username: 'kitchen',
                 password: await BcryptUtil.hash('kitchenkitchen'),
-                role: 'KITCHEN'
+                role: 'KITCHEN',
+                email: 'garfield389@ethereal.email'
             }
         ]
     })
