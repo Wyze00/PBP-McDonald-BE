@@ -7,6 +7,27 @@ import { OrderValidation } from "src/validations/order.validation.js";
 import { id } from "zod/locales";
 
 export class OrderService {
+    static async fetchById(id: string) {
+        const order = await prismaClient.order.findUnique({
+            where: {
+                id: id
+            },
+            include: {
+                orderTransaction: true,
+                orderedProductsDetails: {
+                    include: {
+                        product: true // Fetches the actual product data (name, price)
+                    }
+                }
+            }
+        });
+
+        if (!order) {
+            throw new Error("Order not found");
+        }
+
+        return order;
+    }
 
     static async create(data: PostOrderRequest) {
         const validatedData = ZodUtil.validate(data, OrderValidation.CREATEREQUEST)

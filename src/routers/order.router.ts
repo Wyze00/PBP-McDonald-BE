@@ -23,6 +23,21 @@ export class OrderRouter {
                 data: response
             })
         })
+
+        this.router.get('/:id', async (req: Request, res: Response) => {
+            try {
+                const { id } = req.params;
+                const response = await OrderService.fetchById(id as string);
+
+                return res.status(200).json({
+                    data: response
+                });
+            } catch (error) {
+                return res.status(404).json({
+                    error: "Order not found"
+                });
+            }
+        });
     }
 
     static getRouter() {
