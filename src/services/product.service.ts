@@ -79,7 +79,7 @@ export class ProductService {
                 id: id
             },
             data: {
-                deletedAt: now
+                deletedAt: now,
             }
         })
 

@@ -19,7 +19,11 @@ export class CategoryService {
     static async fetchAllIncludeProducts() {
         const result = await prismaClient.productCategory.findMany({
             include: {
-                products: true,
+                products: {
+                    where: {
+                        deletedAt: null
+                    }
+                },
             }
         })
 
@@ -34,6 +38,7 @@ export class CategoryService {
                         price: product.price,
                         imageUrl: product.imageUrl,
                         description: product.description,
+                        categoryId: category.id,
                     }
                 })
             }
