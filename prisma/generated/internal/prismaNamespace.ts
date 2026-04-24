@@ -896,10 +896,13 @@ export const UserScalarFieldEnum = {
   id: 'id',
   username: 'username',
   password: 'password',
+  email: 'email',
   role: 'role',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
-  deletedAt: 'deletedAt'
+  deletedAt: 'deletedAt',
+  resetPasswordToken: 'resetPasswordToken',
+  resetPasswordExpires: 'resetPasswordExpires'
 } as const
 
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
@@ -911,7 +914,10 @@ export const ProductScalarFieldEnum = {
   description: 'description',
   imageUrl: 'imageUrl',
   price: 'price',
-  product_category_id: 'product_category_id'
+  product_category_id: 'product_category_id',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  deletedAt: 'deletedAt'
 } as const
 
 export type ProductScalarFieldEnum = (typeof ProductScalarFieldEnum)[keyof typeof ProductScalarFieldEnum]
@@ -930,7 +936,8 @@ export const OrderScalarFieldEnum = {
   orderDate: 'orderDate',
   orderTimestamp: 'orderTimestamp',
   orderNumber: 'orderNumber',
-  status: 'status'
+  status: 'status',
+  updatedAt: 'updatedAt'
 } as const
 
 export type OrderScalarFieldEnum = (typeof OrderScalarFieldEnum)[keyof typeof OrderScalarFieldEnum]
@@ -951,7 +958,9 @@ export const OrderTransactionScalarFieldEnum = {
   order_id: 'order_id',
   paymentMehthod: 'paymentMehthod',
   totalCost: 'totalCost',
-  status: 'status'
+  status: 'status',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 } as const
 
 export type OrderTransactionScalarFieldEnum = (typeof OrderTransactionScalarFieldEnum)[keyof typeof OrderTransactionScalarFieldEnum]

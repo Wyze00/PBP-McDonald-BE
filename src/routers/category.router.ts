@@ -9,7 +9,7 @@ export class CategoryRouter {
     private static router: Router
 
     static {
-        this.router = express.Router(); 
+        this.router = express.Router();
         this.init();
     }
 
@@ -29,11 +29,11 @@ export class CategoryRouter {
 
             return res.status(200).json({
                 data: response,
-            })            
+            })
         })
     }
 
-    static getRouter () {
+    static getRouter() {
         return this.router;
     }
 }
@@ -42,7 +42,7 @@ export class CategoryRouterWithMiddleware {
     private static router: Router
 
     static {
-        this.router = express.Router(); 
+        this.router = express.Router();
         this.router.use(authMiddleware);
         this.router.use(adminRoleMiddleware);
         this.init();
@@ -59,6 +59,7 @@ export class CategoryRouterWithMiddleware {
             return res.status(200).json({
                 data: response,
             })
+
         })
 
         this.router.put('/:categoryId', async (req: Request, res: Response) => {
@@ -84,7 +85,7 @@ export class CategoryRouterWithMiddleware {
         })
     }
 
-    static getRouter () {
+    static getRouter() {
         return this.router;
     }
 }

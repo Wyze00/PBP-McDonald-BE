@@ -16,7 +16,7 @@ export class CategoryService {
         })
     }
 
-    static async fetchAllIncludeProducts () {
+    static async fetchAllIncludeProducts() {
         const result = await prismaClient.productCategory.findMany({
             include: {
                 products: true,
