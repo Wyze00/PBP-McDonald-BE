@@ -13,13 +13,16 @@ enum Role {
 }
 
 model User {
-  id        String    @id @default(uuid()) @db.VarChar(100)
-  username  String    @unique @db.VarChar(20)
-  password  String    @db.VarChar(100)
-  role      Role
-  createdAt DateTime  @default(now())
+  id String @id @db.VarChar(100) @default(uuid())
+  username String @db.VarChar(20) @unique
+  password String @db.VarChar(100)
+  email String @db.VarChar(100) @unique
+  role Role
+  createdAt DateTime @default(now())
   updatedAt DateTime?
   deletedAt DateTime?
+  resetPasswordToken String? @db.VarChar(255)
+  resetPasswordExpires DateTime?
 
   @@map("users")
 }

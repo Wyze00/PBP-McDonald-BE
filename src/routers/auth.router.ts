@@ -2,7 +2,7 @@ import type { Request, Response, Router } from "express";
 import express from 'express';
 import { authMiddleware } from "src/middlewares/auth.middleware.js";
 import { AuthService } from "src/services/auth.service.js";
-import type { LoginRequest } from "src/types/auth.type.js";
+import type { LoginRequest, PostResetPasswordRequest, PostResetPasswordVerifyRequest } from "src/types/auth.type.js";
 import type { RequestWithUser } from "src/types/express.type.js";
 
 export class AuthRouter {
@@ -34,6 +34,27 @@ export class AuthRouter {
                 }
             })
         })
+
+
+        this.router.post('/reset-password', async (req: Request, res: Response) => {
+            const data = req.body as PostResetPasswordRequest;
+
+            const response = await AuthService.resetPassword(data);
+
+            res.status(200).json({
+                data: response,
+            })
+        })
+
+        this.router.post('/reset-password/verify', async (req: Request, res: Response) => {
+            const data = req.body as PostResetPasswordVerifyRequest;
+
+            const response = await AuthService.resetPasswordVerify(data);
+
+            res.status(200).json({
+                data: response,
+            })
+        })
     }
 
     static getRouter () {
@@ -59,7 +80,6 @@ export class AuthRouterWithMiddleware {
         })
 
         this.router.delete('/logout', async (req: RequestWithUser, res: Response) => {
-
             res.clearCookie('token', {
                 path: '/'
             });   
