@@ -1,5 +1,9 @@
 import { prismaClient } from "src/utils/prisma.util.js";
 import { OrderStatus } from "prisma/generated/enums.js";
+import type { PostOrderRequest } from "src/types/order.type.js";
+import { OrderValidation } from "src/validations/order.validation.js";
+import { ZodUtil } from "src/utils/zod.util.js";
+import type { PaymentMethod, Product } from "prisma/generated/client.js";
 
 export class OrderService {
     static async fetchReadyAndOngoingOrders() {

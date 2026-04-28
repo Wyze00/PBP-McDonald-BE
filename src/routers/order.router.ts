@@ -22,9 +22,11 @@ export class OrderRouter {
 
             try {
                 let response;
-                if (status === 'COMPLETED') {
+                if (status === 'completed') {
+                    console.log('completed');
                     response = await OrderService.fetchCompletedOrders();
                 } else {
+                    console.log('ready');
                     response = await OrderService.fetchReadyAndOngoingOrders();
                 }
 
@@ -44,7 +46,7 @@ export class OrderRouter {
             
             try {
                 let response;
-                if (status === 'ONGOING') {
+                if (status === 'READY') {
                     response = await OrderService.markOngoing(orderId as string);
                 } else if (status === 'COMPLETED') {
                     response = await OrderService.markCompleted(orderId as string);

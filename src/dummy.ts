@@ -24,14 +24,18 @@ async function dummyCategory() {
     await prismaClient.productCategory.create({
         data: {
             id: 'makanan',
-            name: 'Makanan'           
+            name: 'Makanan',
+            startTime: new Date("1970-01-01T10:00:00"),
+            endTime: new Date("1970-01-01T23:00:00"),         
         }
     })
 
     await prismaClient.productCategory.create({
         data: {
             id: 'minuman',
-            name: 'Minuman'            
+            name: 'Minuman',
+            startDate: new Date('2026-04-01'),
+            endDate: new Date('2026-04-30'),
         }
     })
 }
@@ -196,19 +200,11 @@ async function dummyTransaction () {
     })
 }
 
-dummyUser()
-.then(() => {
-    dummyCategory()
-    .then(() => {
-        dummyProduct()
-        .then(() => {
-            dummyOrder()
-            .then(() => {
-                dummyTransaction()
-                .then(() => {
-                    console.log('Callback Hell');
-                })
-            })
-        })
-    })
-})
+async function init() {
+    await dummyCategory();
+    await dummyProduct();
+    await dummyOrder();
+    await dummyTransaction();
+}
+
+init();

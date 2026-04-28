@@ -45,8 +45,12 @@ model Product {
 }
 
 model ProductCategory {
-  id   String @id @default(uuid()) @db.VarChar(100)
-  name String @unique @db.VarChar(100)
+  id        String    @id @default(uuid()) @db.VarChar(100)
+  name      String    @unique @db.VarChar(100)
+  startDate DateTime? @db.Date
+  endDate   DateTime? @db.Date
+  startTime DateTime? @db.Time()
+  endTime   DateTime? @db.Time()
 
   products Product[]
 
